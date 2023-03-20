@@ -30,4 +30,10 @@ final class PokemonDBCLient {
             }
         }.resume()
     }
+    
+    //MARK: - PokemonList Screen Methods
+    func getPokemonList(completion: @escaping (Result<Pokemon?, Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.BASE_URL)pokemon/ditto") else { return }
+        makeRequest(url: url, completion: completion)
+    }
 }
