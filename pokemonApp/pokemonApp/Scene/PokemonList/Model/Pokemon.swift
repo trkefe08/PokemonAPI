@@ -8,15 +8,7 @@
 import Foundation
 
 struct Pokemon: Codable {
-    let name: String?
-    let abilities: [Ability]?
-    let sprites: Sprites?
-    let id: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case abilities
-        case id
-        case name
-        case sprites
-    }
+    let count: Int?
+    let next: String?
+    let results: [Conclusion]?
 }

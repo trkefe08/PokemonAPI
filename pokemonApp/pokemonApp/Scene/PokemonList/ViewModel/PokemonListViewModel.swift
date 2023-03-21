@@ -12,6 +12,9 @@ protocol PokemonListViewModelProtocol {
     var delegate: PokemonListViewModelDelegate? { get set }
     func fetchPokemonList()
     func getPokemonCount() -> Int
+    func getPokemon(at index: Int) -> Conclusion?
+    func getGamesId(at index: Int) -> String?
+
 }
 
 //MARK: - Delegate
@@ -24,14 +27,14 @@ final class PokemonListViewModel: PokemonListViewModelProtocol {
     
     //MARK: - Variables
     weak var delegate: PokemonListViewModelDelegate?
-    private var pokemon: Pokemon?
+    private var pokemon: [Conclusion]? = []
     
     //MARK: - Methods
     func fetchPokemonList() {
         PokemonDBCLient.shared.getPokemonList { [weak self] result in
             switch result {
             case .success(let results):
-                self?.pokemon = results
+                self?.pokemon = results?.results
                 self?.delegate?.pokemonLoaded()
             case .failure(let error):
                 print(String(describing: error))
@@ -40,6 +43,15 @@ final class PokemonListViewModel: PokemonListViewModelProtocol {
     }
     
     func getPokemonCount() -> Int {
-        return pokemon?.name?.count ?? 0
+        return pokemon?.count ?? 0
     }
+    
+    func getPokemon(at index: Int) -> Conclusion? {
+        return pokemon?[index]
+    }
+    
+    func getGamesId(at index: Int) -> String? {
+        pokemon?[index].url
+    }
+
 }
