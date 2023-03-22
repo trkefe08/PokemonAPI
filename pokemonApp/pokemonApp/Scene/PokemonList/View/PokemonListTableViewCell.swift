@@ -14,8 +14,13 @@ class PokemonListTableViewCell: UITableViewCell {
     @IBOutlet private weak var pokemonImageView: UIImageView!
     @IBOutlet private weak var pokemonNameLabel: UILabel!
     
-    //MARK: - Methods
+    //MARK: - Lifecycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pokemonImageView.image = nil
+    }
     
+    //MARK: - Methods
     func configureCell(pokemon: Conclusion) {
         pokemonNameLabel.text = pokemon.name
     }
@@ -24,5 +29,4 @@ class PokemonListTableViewCell: UITableViewCell {
         guard let url = URL(string: pokemonImage.frontDefault ?? "not found") else { return }
         pokemonImageView.kf.setImage(with: url)
     }
-    
 }

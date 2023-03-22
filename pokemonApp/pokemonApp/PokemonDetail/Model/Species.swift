@@ -2,7 +2,7 @@
 //  Species.swift
 //  pokemonApp
 //
-//  Created by Tarik Efe on 21.03.2023.
+//  Created by Tarik Efe on 22.03.2023.
 //
 
 import Foundation

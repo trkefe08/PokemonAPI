@@ -41,4 +41,10 @@ final class PokemonDBCLient {
         guard let url = URL(string: "\(Constants.BASE_URL)pokemon/\(id)") else { return }
         makeRequest(url: url, completion: completion)
     }
+    
+    //MARK: - PokemonDetail Screen Method
+    func getPokemonDetail(with id: String, completion: @escaping (Result<PokemonDetail?, Error>) -> Void) {
+        guard let url = URL(string: "\(id)") else { return }
+        makeRequest(url: url, completion: completion)
+    }
 }

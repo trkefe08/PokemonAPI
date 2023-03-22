@@ -16,7 +16,6 @@ protocol PokemonListViewModelProtocol {
     func getPokemon(at index: Int) -> Conclusion?
     func getPokemonImage(at index: Int) -> Sprites?
     func getPokemonId(at index: Int) -> String?
-
 }
 
 //MARK: - Delegate

@@ -24,8 +24,7 @@ final class PokemonListViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         viewModel.fetchPokemonList()
-        //print(viewModel.fetchPokemonImage())
-        
+        pokemonListTableView.rowHeight = 250
     }
 }
 
@@ -37,24 +36,24 @@ extension PokemonListViewController: PokemonListViewModelDelegate {
 }
 
 extension PokemonListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: PokemonDetailViewController.self)) as? PokemonDetailViewController else { return }
+        detailVC.pokemonId = viewModel.getPokemonId(at: indexPath.row)
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
 }
 
 extension PokemonListViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getPokemonCount()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? PokemonListTableViewCell, let model = viewModel.getPokemon(at: indexPath.section), let modelImage = viewModel.getPokemonImage(at: indexPath.section) else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? PokemonListTableViewCell, let model = viewModel.getPokemon(at: indexPath.row), let modelImage = viewModel.getPokemonImage(at: indexPath.row) else { return UITableViewCell() }
         cell.configureCell(pokemon: model)
         cell.configureImage(pokemonImage: modelImage)
         return cell
     }
-    
-    
 }
