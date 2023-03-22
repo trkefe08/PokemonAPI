@@ -36,4 +36,9 @@ final class PokemonDBCLient {
         guard let url = URL(string: "\(Constants.BASE_URL)pokemon") else { return }
         makeRequest(url: url, completion: completion)
     }
+    
+    func getPokemonImage(with id: String, completion: @escaping (Result<Pokemon?, Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.BASE_URL)pokemon/\(id)") else { return }
+        makeRequest(url: url, completion: completion)
+    }
 }

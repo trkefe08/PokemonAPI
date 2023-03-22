@@ -24,6 +24,7 @@ final class PokemonListViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         viewModel.fetchPokemonList()
+        //print(viewModel.fetchPokemonImage())
         
     }
 }
@@ -49,8 +50,9 @@ extension PokemonListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? PokemonListTableViewCell, let model = viewModel.getPokemon(at: indexPath.section) else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? PokemonListTableViewCell, let model = viewModel.getPokemon(at: indexPath.section), let modelImage = viewModel.getPokemonImage(at: indexPath.section) else { return UITableViewCell() }
         cell.configureCell(pokemon: model)
+        cell.configureImage(pokemonImage: modelImage)
         return cell
     }
     

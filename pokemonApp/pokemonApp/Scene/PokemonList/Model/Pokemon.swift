@@ -11,4 +11,5 @@ struct Pokemon: Codable {
     let count: Int?
     let next: String?
     let results: [Conclusion]?
+    let sprites: Sprites?
 }

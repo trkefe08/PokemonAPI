@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PokemonListTableViewCell: UITableViewCell {
 
@@ -18,4 +19,10 @@ class PokemonListTableViewCell: UITableViewCell {
     func configureCell(pokemon: Conclusion) {
         pokemonNameLabel.text = pokemon.name
     }
+    
+    func configureImage(pokemonImage: Sprites) {
+        guard let url = URL(string: pokemonImage.frontDefault ?? "not found") else { return }
+        pokemonImageView.kf.setImage(with: url)
+    }
+    
 }
